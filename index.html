@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Very Cool Alex</title>
+<meta name="description" content="Movies, games and products Alex thinks are very cool.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23EE352E'/><text x='50' y='70' font-family='Helvetica,Arial' font-weight='700' font-size='58' fill='white' text-anchor='middle'>V</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+<script>
+/* =========================================================
+   YOUR POSTS GO HERE.
+   Easiest way: open your site with #new at the end
+   (verycoolalex.com/#new), fill in the form, hit
+   "Copy post", then paste it right below this line.
+   type must be: "movie", "game" or "product"
+   link and image are optional — leave them as ""
+   ========================================================= */
+const POSTS = [
+  {
+    title: "Paste your first post here",
+    type: "movie",
+    date: "2026-10-07",
+    text: "This is a sample. Delete it once you've added a real one. Keep posts to a few sentences — the point is the find, not the essay.",
+    link: "",
+    image: ""
+  },
+  {
+    title: "A game that's very cool",
+    type: "game",
+    date: "2026-10-05",
+    text: "Two or three sentences on why it rules. That's it.",
+    link: "",
+    image: ""
+  },
+  {
+    title: "A product that's very cool",
+    type: "product",
+    date: "2026-10-01",
+    text: "What it is, why you'd want one, and whether it's worth the money.",
+    link: "",
+    image: ""
+  },
+];
+</script>
+
+<style>
+:root{
+  --tile:#ECEAE3; --grout:#D7D3C8; --sign:#000; --white:#fff; --dim:#A7A7A7;
+  --movie:#EE352E; --game:#00933C; --product:#FCCC0A; --all:#0039A6;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{background:var(--tile)}
+body{margin:0;color:var(--white);
+  font-family:"Helvetica Neue",Helvetica,Archivo,Arial,sans-serif;
+  font-size:18px;line-height:1.5;
+  background-color:var(--tile);
+  background-image:
+    linear-gradient(var(--grout) 2px,transparent 2px),
+    linear-gradient(90deg,var(--grout) 2px,transparent 2px);
+  background-size:72px 36px}
+.wrap{max-width:720px;margin:0 auto;padding:0 18px 72px}
+
+/* Station-sign header */
+.sign{background:var(--sign);margin:32px 0 18px;padding:26px 26px 24px;position:relative}
+.sign::before{content:"";position:absolute;left:0;right:0;top:9px;height:2px;background:var(--white)}
+.sign h1{margin:10px 0 0;font-weight:700;font-size:clamp(44px,11vw,84px);line-height:.95;letter-spacing:-.03em}
+.sign h1 a{color:inherit;text-decoration:none}
+.sign p{margin:16px 0 0;color:var(--dim);font-size:17px;max-width:40ch}
+
+/* Bullets */
+.bullet{display:inline-grid;place-items:center;width:1.9em;height:1.9em;border-radius:50%;
+  font-weight:700;font-size:20px;line-height:1;color:var(--white);flex:none;background:var(--c)}
+.bullet.product{color:#000}
+.movie{--c:var(--movie)} .game{--c:var(--game)} .product{--c:var(--product)} .all{--c:var(--all)}
+
+/* Filter = line bullets */
+nav{display:flex;flex-wrap:wrap;gap:10px;background:var(--sign);padding:14px 16px;margin:0 0 30px}
+nav button{display:flex;align-items:center;gap:10px;font:inherit;font-size:16px;font-weight:500;
+  cursor:pointer;background:transparent;color:var(--dim);border:0;padding:4px 10px 4px 4px;border-radius:999px}
+nav button .bullet{font-size:15px;opacity:.45}
+nav button[aria-pressed="true"]{color:var(--white)}
+nav button[aria-pressed="true"] .bullet{opacity:1}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{
+  outline:3px solid var(--product);outline-offset:3px}
+
+/* Posts as signs */
+.post{background:var(--sign);margin:0 0 24px;padding:24px 24px 26px;position:relative}
+.post::before{content:"";position:absolute;left:0;right:0;top:8px;height:2px;background:var(--white)}
+.head{display:flex;gap:14px;align-items:flex-start;margin-top:8px}
+.post h2{margin:2px 0 0;font-size:28px;line-height:1.1;letter-spacing:-.02em;font-weight:700}
+.meta{color:var(--dim);font-size:15px;margin-top:6px}
+.post p{margin:16px 0 0;max-width:60ch;color:#E9E9E9}
+.post img{display:block;width:100%;max-height:380px;object-fit:cover;margin:20px 0 0}
+.go{display:inline-flex;align-items:center;gap:8px;margin-top:18px;color:var(--white);font-weight:700;
+  text-decoration:none;border-bottom:3px solid var(--c);padding-bottom:2px}
+
+.empty{background:var(--sign);padding:22px 24px}
+footer{color:#6B6860;font-size:15px;padding-top:8px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* Compose page (#new) */
+#compose{display:none}
+body.composing #feed,body.composing nav{display:none}
+body.composing #compose{display:block}
+label{display:block;font-weight:700;font-size:15px;margin:16px 0 6px}
+input,textarea,select{width:100%;font:inherit;font-size:16px;padding:10px 12px;border:2px solid #444;
+  border-radius:0;background:#111;color:var(--white)}
+textarea{min-height:110px;resize:vertical}
+.count{font-size:13px;color:var(--dim);text-align:right;margin-top:4px}
+.row{display:flex;gap:12px}.row>div{flex:1}
+pre{background:#111;border:1px solid #333;color:#E9E9E9;padding:14px;overflow-x:auto;font-size:14px;white-space:pre-wrap;margin:14px 0 0}
+.btn{font:inherit;font-weight:700;font-size:17px;cursor:pointer;background:var(--product);color:#000;
+  border:0;padding:12px 24px;border-radius:999px;margin-top:20px}
+.hint{font-size:15px;color:var(--dim);margin:12px 0 0}
+@media (max-width:480px){.row{flex-direction:column;gap:0}.post,.sign{padding-left:18px;padding-right:18px}.post h2{font-size:24px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="sign">
+    <h1><a href="#">Very Cool Alex</a></h1>
+    <p>Movies, games and stuff I think are very cool. Short posts, no filler.</p>
+  </header>
+
+  <nav aria-label="Filter posts">
+    <button data-f="all" aria-pressed="true"><span class="bullet all">A</span>All</button>
+    <button data-f="movie" aria-pressed="false"><span class="bullet movie">M</span>Movies</button>
+    <button data-f="game" aria-pressed="false"><span class="bullet game">G</span>Games</button>
+    <button data-f="product" aria-pressed="false"><span class="bullet product">P</span>Products</button>
+  </nav>
+
+  <main id="feed"></main>
+
+  <section id="compose">
+    <div class="post">
+      <h2>New post</h2>
+      <div class="row">
+        <div><label for="c-type">Type</label>
+          <select id="c-type"><option value="movie">Movie</option><option value="game">Game</option><option value="product">Product</option></select></div>
+        <div><label for="c-date">Date</label><input id="c-date" type="date"></div>
+      </div>
+      <label for="c-title">Title</label><input id="c-title" placeholder="What is it?">
+      <label for="c-text">Why it's cool</label><textarea id="c-text" maxlength="400" placeholder="A few sentences."></textarea>
+      <div class="count"><span id="c-count">0</span>/400</div>
+      <label for="c-link">Link (optional)</label><input id="c-link" type="url" placeholder="https://">
+      <label for="c-image">Image URL (optional)</label><input id="c-image" type="url" placeholder="https://">
+      <button class="btn" id="c-copy">Copy post</button>
+      <p class="hint" id="c-status">Paste it into the POSTS list at the top of your index.html, then re-upload.</p>
+      <pre id="c-out"></pre>
+    </div>
+  </section>
+
+  <footer><span>© <span id="yr"></span> verycoolalex.com</span><span>Stand clear of the closing doors.</span></footer>
+</div>
+
+<script>
+const LABEL={movie:"Movie",game:"Game",product:"Product"};
+const LETTER={movie:"M",game:"G",product:"P"};
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt=d=>{const t=new Date(d+"T12:00:00");return isNaN(t)?"":t.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"})};
+const feed=document.getElementById("feed");
+let filter="all";
+
+function render(){
+  const list=POSTS.filter(p=>filter==="all"||p.type===filter)
+    .sort((a,b)=>(b.date||"").localeCompare(a.date||""));
+  if(!list.length){feed.innerHTML=`<p class="empty">Nothing on this line yet.</p>`;return}
+  feed.innerHTML=list.map(p=>`
+    <article class="post ${esc(p.type)}">
+      <div class="head">
+        <span class="bullet ${esc(p.type)}" aria-hidden="true">${LETTER[p.type]||"?"}</span>
+        <div>
+          <h2>${esc(p.title)}</h2>
+          <div class="meta">${LABEL[p.type]||""}, ${fmt(p.date)}</div>
+        </div>
+      </div>
+      ${p.image?`<img src="${esc(p.image)}" alt="" loading="lazy">`:""}
+      <p>${esc(p.text)}</p>
+      ${p.link?`<a class="go" href="${esc(p.link)}" target="_blank" rel="noopener">Check it out</a>`:""}
+    </article>`).join("");
+}
+
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{
+  filter=b.dataset.f;
+  document.querySelectorAll("nav button").forEach(x=>x.setAttribute("aria-pressed",x===b));
+  render();
+});
+
+/* Compose helper */
+const $=id=>document.getElementById(id);
+$("c-date").value=new Date().toLocaleDateString("en-CA");
+function snippet(){
+  $("c-count").textContent=$("c-text").value.length;
+  const s=v=>JSON.stringify(v.trim());
+  $("c-out").textContent=`  {
+    title: ${s($("c-title").value)},
+    type: ${s($("c-type").value)},
+    date: ${s($("c-date").value)},
+    text: ${s($("c-text").value)},
+    link: ${s($("c-link").value)},
+    image: ${s($("c-image").value)}
+  },`;
+}
+["c-type","c-date","c-title","c-text","c-link","c-image"].forEach(id=>$(id).addEventListener("input",snippet));
+$("c-copy").onclick=async()=>{
+  try{await navigator.clipboard.writeText($("c-out").textContent);$("c-status").textContent="Copied. Paste it into the POSTS list and re-upload.";}
+  catch{$("c-status").textContent="Couldn't copy automatically — select the text below and copy it.";}
+};
+function route(){document.body.classList.toggle("composing",location.hash==="#new");snippet()}
+window.addEventListener("hashchange",route);
+
+$("yr").textContent=new Date().getFullYear();
+route();render();
+</script>
+</body>
+</html>
